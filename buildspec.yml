@@ -10,7 +10,6 @@ phases:
       - cd frontend
       - npm ci
       - cd ..
-
       - echo "Installing backend dependencies..."
       - python -m pip install --upgrade pip
       - python -m pip install -r backend/requirements.txt
