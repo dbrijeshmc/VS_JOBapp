@@ -21,9 +21,12 @@ phases:
       - npm run build
       - cd ..
 
+
 artifacts:
+  base-directory: frontend/dist
   files:
     - '**/*'
+
   exclude-paths:
     - '**/node_modules/**/*'
     - '**/venv/**/*'
