@@ -3,11 +3,8 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
-    commands:
-      - echo "Installing dependencies..."
-
-  pre_build:
+      nodejs: 20
+      python: 3.12
     commands:
       - echo "Installing frontend dependencies..."
       - cd frontend
@@ -15,9 +12,8 @@ phases:
       - cd ..
 
       - echo "Installing backend dependencies..."
-      - cd backend
-      - npm ci
-      - cd ..
+      - python -m pip install --upgrade pip
+      - python -m pip install -r backend/requirements.txt
 
   build:
     commands:
@@ -26,16 +22,11 @@ phases:
       - npm run build
       - cd ..
 
-      - echo "Building backend..."
-      - cd backend
-      - npm run build
-      - cd ..
-
-  post_build:
-    commands:
-      - echo "Build completed successfully!"
-
 artifacts:
   files:
     - '**/*'
-  discard-paths: no
+  exclude-paths:
+    - '**/node_modules/**/*'
+    - '**/venv/**/*'
+    - '**/.pytest_cache/**/*'
+    - '**/__pycache__/**/*'
